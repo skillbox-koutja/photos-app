@@ -13,10 +13,11 @@ const getQueryVariable = (variable) => {
 };
 
 export default {
-    login: (type = API_UNSPLASH) => {
+    defaultType: API_UNSPLASH,
+    signIn: (type = API_UNSPLASH) => {
         switch (type) {
             case API_UNSPLASH:
-                unsplash.login();
+                unsplash.signIn();
                 break;
             default:
                 throw new Error('Invalid instance of api');

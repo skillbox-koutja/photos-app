@@ -12,8 +12,7 @@ const unsplash = new Unsplash({
 });
 
 export default {
-    login: () => {
-        console.log({unsplash});
+    signIn: () => {
         const authenticationUrl = unsplash.auth.getAuthenticationUrl([
             "public",
             "write_likes"
@@ -21,5 +20,9 @@ export default {
 
         // Отправляем пользователя по этому адресу
         window.location.assign(authenticationUrl);
+        // console.log({
+        //     authenticationUrl,
+        //     unsplash
+        // });
     }
 };

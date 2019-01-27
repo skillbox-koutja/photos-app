@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import './Auth.css';
 import api from '../../api'
 
-class Auth extends Component {
+export class Auth extends Component {
 
     componentDidMount() {
         // Считываем GET-параметр code из URL
@@ -19,5 +19,3 @@ class Auth extends Component {
         );
     }
 }
-
-export default Auth;

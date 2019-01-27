@@ -1,18 +1,19 @@
 import React, {Component} from 'react';
 import './App.css';
-import api from '../../api';
+import UserContainer from "../../containers/UserContainer";
+// import api from '../../api';
 
-api.login();
+// api.signIn();
 
-class App extends Component {
+export class App extends Component {
     render() {
         return (
-            <div className="App">
-                <header className="App-header">
+            <div className="app">
+                <header className="app__header">
+                    <UserContainer/>
                 </header>
+                картинки
             </div>
         );
     }
 }
-
-export default App;
