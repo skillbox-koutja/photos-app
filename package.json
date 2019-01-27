@@ -2,7 +2,7 @@
   "name": "photo-galery-react-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://skillbox-koutja-comment-widget.github.io/comments-widget-redux-app",
+  "homepage": "https://photo-galery-react-app.herokuapp.com/",
   "dependencies": {
     "bootstrap": "^4.2.1",
     "prop-types": "^15.6.2",
