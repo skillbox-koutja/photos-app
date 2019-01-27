@@ -1,25 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import {Route, Switch} from 'react-router';
-import {ConnectedRouter} from 'connected-react-router'
-import configureStore, {history} from './store/configureStore'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {App, Auth} from './components/';
 import * as serviceWorker from './serviceWorker';
+
+import configureStore, {history} from './store/configureStore';
+import App from './App';
 
 const store = configureStore();
 
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <>
-                <Switch>
-                    <Route path="/" component={App}/>
-                    <Route path="/auth" component={Auth}/>
-                </Switch>
-            </>
-        </ConnectedRouter>
+        <App history={history}/>
     </Provider>,
     document.getElementById('root')
 );
