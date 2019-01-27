@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import './App.css';
-import api from '../api';
-
-const {REACT_APP_UNSPLASH_ACCESS_KEY, REACT_APP_UNSPLASH_SECRET, REACT_APP_CALLBACK_URL} = process.env;
+import api from '../../api';
 
 api.login();
 
@@ -11,9 +9,6 @@ class App extends Component {
         return (
             <div className="App">
                 <header className="App-header">
-                    {REACT_APP_UNSPLASH_ACCESS_KEY} +
-                    {REACT_APP_UNSPLASH_SECRET} +
-                    {REACT_APP_CALLBACK_URL}
                 </header>
             </div>
         );
