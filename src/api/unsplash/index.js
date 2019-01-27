@@ -2,9 +2,9 @@ import Unsplash from 'unsplash-js';
 
 // Создаем экземпляр объекта для доступа к API
 const unsplash = new Unsplash({
-    applicationId: "{UNSPLASH_ACCESS_KEY}",
-    secret: "{UNSPLASH_SECRET}",
-    callbackUrl: "{CALLBACK_URL}/auth"
+    applicationId: "{REACT_APP_UNSPLASH_ACCESS_KEY}",
+    secret: "{REACT_APP_UNSPLASH_SECRET}",
+    callbackUrl: "{REACT_APP_CALLBACK_URL}/auth"
 });
 
 export default {
