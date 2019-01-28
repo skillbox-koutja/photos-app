@@ -17,15 +17,21 @@ export default {
             "public",
             "write_likes"
         ]);
-
+        console.log({
+            authenticationUrl,
+            unsplash
+        });
         // Отправляем пользователя по этому адресу
         window.location.assign(authenticationUrl);
-        // console.log({
-        //     authenticationUrl,
-        //     unsplash
-        // });
     },
     userAuthentication(query, success, failure) {
+        console.log({
+            fn: 'userAuthentication',
+            unsplash,
+            query,
+            success,
+            failure
+        });
         unsplash.auth.userAuthentication(query.code)
             .then(toJson)
             .then(json => {
