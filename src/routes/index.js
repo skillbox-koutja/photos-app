@@ -16,6 +16,7 @@ const AuthApiRoute = ({ component: Component, ...rest }) => (
 
 const routes = (
     <div>
+        { api.apiType }
         <Switch>
             <Route
                 exact
