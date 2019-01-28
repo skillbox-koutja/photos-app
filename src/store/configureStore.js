@@ -11,10 +11,10 @@ export const history = createBrowserHistory({
 });
 
 let middleware = [thunk];
-if (process.env.NODE_ENV !== 'production') {
-    middleware = [...middleware, logger];
-}
-
+// if (process.env.NODE_ENV !== 'production') {
+//     middleware = [...middleware, logger];
+// }
+middleware = [...middleware, logger];
 export default function configureStore(preloadedState) {
     return createStore(
         createRootReducer(history), // root reducer with router state
