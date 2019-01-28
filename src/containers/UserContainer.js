@@ -13,15 +13,15 @@ class UserContainer extends React.Component {
             handleSignIn,
             currentTarget: evt.currentTarget
         });
-        handleSignIn(type, () => console.log('handleSignIn successCallback'));
+        handleSignIn(type);
     };
 
     renderAuthorizedTemplate() {
-        const {user} = this.props;
+        const {profile} = this.props;
         return (
             <React.Fragment>
                 <User
-                    name={user.name}
+                    name={profile.firstName + ' ' + profile.lastName}
                 />
                 <SignOut
                     handleSignOut={this.handleSignOut}
@@ -41,11 +41,11 @@ class UserContainer extends React.Component {
     };
 
     render() {
-        const {user} = this.props;
+        const {profile} = this.props;
         return (
             <div className="user-info">
                 {
-                    user && user.name ? this.renderAuthorizedTemplate() : this.renderUnknownUserTemplate()
+                    profile && profile.username ? this.renderAuthorizedTemplate() : this.renderUnknownUserTemplate()
                 }
             </div>
         )
@@ -60,7 +60,7 @@ const mapStateToProps = store => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        handleSignIn: (api, successCallback) => dispatch(handleSignIn(api, successCallback)),
+        handleSignIn: (api) => dispatch(handleSignIn(api)),
         handleSignOut: successCallback => dispatch(handleSignOut(successCallback)),
     }
 };

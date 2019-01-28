@@ -6,7 +6,7 @@ import {
 } from '../actions/UserActions'
 
 const initialState = {
-    name: '',
+    profile: null,
     error: '',
     isFetching: false,
 };
@@ -17,7 +17,7 @@ export function userReducer(state = initialState, action) {
             return {...state, isFetching: true, error: ''};
 
         case SIGN_IN_SUCCESS:
-            return {...state, isFetching: false, name: action.payload};
+            return {...state, isFetching: false, profile: action.payload};
 
         case SIGN_IN_FAIL:
             return {...state, isFetching: false, error: action.payload.message};

@@ -14,7 +14,9 @@ const getQueryVariable = (variable) => {
 
 export default {
     defaultType: API_UNSPLASH,
-    signIn: (type = API_UNSPLASH) => {
+    apiType: null,
+    signIn(type = API_UNSPLASH) {
+        this.apiType = type;
         switch (type) {
             case API_UNSPLASH:
                 unsplash.signIn();
@@ -23,19 +25,38 @@ export default {
                 throw new Error('Invalid instance of api');
         }
     },
-    getAuth: (type = API_UNSPLASH) => {
-        switch (type) {
+    getAuth() {
+        switch (this.apiType) {
             case API_UNSPLASH:
                 // Считываем GET-параметр code из URL
                 const code = getQueryVariable('code');
-                const api = getQueryVariable('api');
-                console.log(code, api, window.location.search);
+                console.log(code, window.location.search);
                 return {
                     code,
-                    api
                 };
             default:
                 throw new Error('Invalid instance of api');
         }
+    },
+    userAuthentication(query, success, failure) {
+        switch (this.apiType) {
+            case API_UNSPLASH:
+                unsplash.userAuthentication(query, success, failure);
+                break;
+            default:
+                throw new Error('Invalid instance of api');
+        }
+    },
+    getPhotos(dispatch) {
+        switch (this.apiType) {
+            case API_UNSPLASH:
+                unsplash.getPhotos(0, 10, dispatch);
+                break;
+            default:
+                throw new Error('Invalid instance of api');
+        }
+    },
+    getMorePhotos(offset, count, dispatch) {
+
     }
 };

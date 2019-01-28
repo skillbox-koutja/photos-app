@@ -6,29 +6,34 @@ export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 
 export const SIGN_OUT_REQUEST = 'SIGN_IN_REQUEST';
 
-export function handleSignIn(apiType, successCallback) {
+export function handleAuthComplete(query) {
     return function (dispatch) {
-        dispatch({
-            type: SIGN_IN_REQUEST,
-        });
-
-        api.signIn(apiType, response => {
-            console.log(response);
-            if (response.session) {
-                const username = response.session.user.first_name;
+        api.userAuthentication(
+            query,
+            user => {
                 dispatch({
                     type: SIGN_IN_SUCCESS,
-                    payload: username,
+                    payload: user,
                 });
-                successCallback();
-            } else {
+            },
+            () => {
                 dispatch({
                     type: SIGN_IN_FAIL,
                     error: true,
                     payload: new Error('Ошибка авторизации'),
                 });
-            }
-        }, 4) // запрос прав на доступ к photo
+            },
+        );
+    }
+}
+
+export function handleSignIn(apiType) {
+    return function (dispatch) {
+        dispatch({
+            type: SIGN_IN_REQUEST,
+        });
+
+        api.signIn(apiType, dispatch);
     }
 }
 

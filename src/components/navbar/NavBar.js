@@ -7,14 +7,6 @@ class NavBar extends React.Component {
     render() {
         return (
             <header className="header">
-                <div onClick={() => {
-                    /** do something before redirection */
-                    this.props.push('/');
-                }}>home</div>
-                <div onClick={() => {
-                    /** do something before redirection */
-                    this.props.push('/auth');
-                }}>auth</div>
                 <UserContainer/>
             </header>
         )
