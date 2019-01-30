@@ -5,9 +5,8 @@ export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 export const SIGN_OUT_REQUEST = 'SIGN_IN_REQUEST';
 
 export function handleAuthComplete(query) {
-    return function (dispatch) {
-        console.log('handleAuthComplete', this, arguments, query);
-        this.state.user.api.userAuthentication(
+    return function (dispatch, getState) {
+        getState().user.api.userAuthentication(
             query,
             user => {
                 dispatch({
