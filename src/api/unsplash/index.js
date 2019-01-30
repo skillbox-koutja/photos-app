@@ -1,4 +1,5 @@
 import Unsplash, {toJson} from 'unsplash-js';
+import getQueryVariable from '../../lib/getQueryVariable';
 
 const {REACT_APP_UNSPLASH_ACCESS_KEY, REACT_APP_UNSPLASH_SECRET, REACT_APP_CALLBACK_URL} = process.env;
 
@@ -12,6 +13,7 @@ const unsplash = new Unsplash({
 });
 
 export default {
+    type: API_UNSPLASH,
     signIn() {
         const authenticationUrl = unsplash.auth.getAuthenticationUrl([
             "public",
@@ -23,6 +25,14 @@ export default {
         });
         // Отправляем пользователя по этому адресу
         window.location.assign(authenticationUrl);
+    },
+    getAuth() {
+        // Считываем GET-параметр code из URL
+        const code = getQueryVariable('code');
+        console.log(code, window.location.search);
+        return {
+            code,
+        };
     },
     userAuthentication(query, success, failure) {
         console.log({

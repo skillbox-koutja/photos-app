@@ -5,13 +5,13 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 
 export class SignIn extends React.Component {
     render() {
-        const {type, icon} = this.props;
-        const id = `btn-sign-in btn-sign-in_api-${type}`;
+        const {api, icon} = this.props;
+        const id = `btn-sign-in btn-sign-in_api-${api}`;
         return (
             <Button
                 color="primary"
                 className={id}
-                api={type}
+                api={api}
                 onClick={this.props.handleSignIn}
             >
                 <FontAwesomeIcon icon={icon}/>
@@ -22,7 +22,7 @@ export class SignIn extends React.Component {
 }
 
 SignIn.propTypes = {
-    type: PropTypes.string.isRequired,
+    api: PropTypes.string.isRequired,
     icon: PropTypes.any.isRequired,
     handleSignIn: PropTypes.func.isRequired,
 };

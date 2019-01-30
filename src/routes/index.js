@@ -1,18 +1,7 @@
 import React from 'react';
-import {Route, Switch, Redirect} from 'react-router';
+import {Route, Switch} from 'react-router';
 import {Feed} from '../components';
 import AuthContainer from '../containers/AuthContainer';
-import api from '../api';
-
-const AuthApiRoute = ({ component: Component, ...rest }) => (
-    <Route {...rest} render={(props) => (
-        api.apiType ? <Component {...props} />
-            : <Redirect to={{
-                pathname: '/',
-                state: { from: props.location }
-            }} />
-    )} />
-);
 
 const routes = (
     <div>
@@ -22,7 +11,7 @@ const routes = (
                 path="/"
                 component={Feed}
             />
-            <AuthApiRoute
+            <Route
                 path="/api-auth"
                 component={AuthContainer}
             />

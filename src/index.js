@@ -6,9 +6,12 @@ import * as serviceWorker from './serviceWorker';
 
 import configureStore, {history} from './store/configureStore';
 import App from './App';
+import createApi, {API_UNSPLASH} from './api';
 
-const store = configureStore();
-
+const store = configureStore({
+    api: createApi(API_UNSPLASH)
+});
+console.log('configureStore', store);
 ReactDOM.render(
     <Provider store={store}>
         <App history={history}/>

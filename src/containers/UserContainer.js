@@ -3,17 +3,12 @@ import {connect} from 'react-redux'
 import {SignIn, SignOut, User} from '../components'
 import {handleSignIn, handleSignOut} from '../actions/UserActions'
 import {faSignInAlt} from '@fortawesome/free-solid-svg-icons';
-import api from '../api';
 
 class UserContainer extends React.Component {
     handleSignIn = (evt) => {
         const {handleSignIn} = this.props;
-        const type = evt.currentTarget.getAttribute('api');
-        console.log({
-            handleSignIn,
-            currentTarget: evt.currentTarget
-        });
-        handleSignIn(type);
+        const apiType = evt.currentTarget.getAttribute('api');
+        handleSignIn(apiType);
     };
 
     renderAuthorizedTemplate() {
@@ -31,9 +26,10 @@ class UserContainer extends React.Component {
     };
 
     renderUnknownUserTemplate() {
+        const {api} = this.props;
         return (
             <SignIn
-                type={api.defaultType}
+                api={api}
                 icon={faSignInAlt}
                 handleSignIn={this.handleSignIn}
             />
@@ -52,13 +48,16 @@ class UserContainer extends React.Component {
     }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
+    console.log('mapStateToProps', state, this);
+    const {user} = state;
     return {
-        user: store.user,
+        user: user,
+        api: user.api.type,
     }
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
     return {
         handleSignIn: (api) => dispatch(handleSignIn(api)),
         handleSignOut: successCallback => dispatch(handleSignOut(successCallback)),
