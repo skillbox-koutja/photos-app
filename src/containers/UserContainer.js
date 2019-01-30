@@ -49,7 +49,6 @@ class UserContainer extends React.Component {
 }
 
 const mapStateToProps = state => {
-    console.log('mapStateToProps', state, this);
     const {user} = state;
     return {
         user: user,

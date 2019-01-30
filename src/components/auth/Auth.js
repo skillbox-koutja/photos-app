@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
 import './Auth.css';
-import api from '../../api';
 import PropTypes from 'prop-types';
 
 export class Auth extends Component {
     componentDidMount() {
+        const {api, handleAuthComplete} = this.props;
         // Считываем GET-параметр code из URL
         const auth = api.getAuth();
-        this.props.handleAuthComplete(auth);
+        handleAuthComplete(auth);
     };
     render() {
         return (
@@ -18,5 +18,6 @@ export class Auth extends Component {
     }
 }
 Auth.propTypes = {
+    api: PropTypes.object.isRequired,
     handleAuthComplete: PropTypes.func.isRequired,
 };

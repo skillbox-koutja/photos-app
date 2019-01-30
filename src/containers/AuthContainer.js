@@ -1,18 +1,21 @@
-import React from 'react'
-import {connect} from 'react-redux'
-import {Auth} from '../components'
-import {handleAuthComplete} from '../actions/UserActions'
+import React from 'react';
+import {connect} from 'react-redux';
+import {Auth} from '../components';
+import {handleAuthComplete} from '../actions/UserActions';
+
 class AuthContainer extends React.Component {
     render() {
+        const {api, handleAuthComplete} = this.props;
         return (
-            <Auth handleAuthComplete={this.props.handleAuthComplete}/>
+            <Auth api={api} handleAuthComplete={handleAuthComplete}/>
         )
     }
 }
 
-const mapStateToProps = store => {
+const mapStateToProps = state => {
+    const {user} = state;
     return {
-        user: store.user,
+        api: user.api,
     }
 };
 
