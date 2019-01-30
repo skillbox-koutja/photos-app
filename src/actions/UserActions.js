@@ -13,6 +13,7 @@ export function handleAuthComplete(query) {
                     type: SIGN_IN_SUCCESS,
                     payload: user,
                 });
+                this.context.router.push('/');
             },
             () => {
                 dispatch({
