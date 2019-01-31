@@ -1,3 +1,5 @@
+import {push} from 'connected-react-router';
+
 export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST';
 export const SIGN_IN_SUCCESS = 'SIGN_IN_SUCCESS';
 export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
@@ -13,7 +15,7 @@ export function handleAuthComplete(query) {
                     type: SIGN_IN_SUCCESS,
                     payload: user,
                 });
-                this.context.router.push('/');
+                dispatch(push('/'));
             },
             () => {
                 dispatch({
