@@ -6,7 +6,7 @@ import {faUser} from '@fortawesome/free-solid-svg-icons';
 export class User extends React.Component {
     render() {
         const {name} = this.props;
-        return <div className="user">
+        return <div className="user d-inline p-2">
             <FontAwesomeIcon icon={faUser}/> {name}
         </div>
     }

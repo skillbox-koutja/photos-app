@@ -1,7 +1,7 @@
 import React from 'react';
 import {Route, Switch} from 'react-router';
-import {Feed} from '../components';
 import AuthContainer from '../containers/AuthContainer';
+import FeedContainer from "../containers/FeedContainer";
 
 const routes = (
     <div>
@@ -9,7 +9,7 @@ const routes = (
             <Route
                 exact
                 path="/"
-                component={Feed}
+                component={FeedContainer}
             />
             <Route
                 path="/api-auth"

@@ -49,19 +49,20 @@ export default {
 
                 unsplash.currentUser.profile()
                     .then(toJson)
-                    .then(profile => {
-                        success(profile);
-                    });
+                    .then(profile => success(profile));
             })
             .catch(failure);
     },
-    getPhotos(offset, count, dispatch) {
+    getPhotos(offset, count, success) {
         unsplash.photos.listPhotos(offset, count, 'latest')
             .then(toJson)
-            .then(json => {
-                dispatch({
-                    payload: json,
-                });
-            });
+            .then(photos => success(photos));
+    },
+    toggleLike(photo, success) {
+        const method = photo.liked_by_user ? 'unlikePhoto': 'likePhoto';
+        console.log(photo.liked_by_user, method);
+        /*unsplash.photos[method](photo.id)
+            .then(toJson)
+            .then(photo => success(photo));*/
     }
 };
