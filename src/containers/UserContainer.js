@@ -16,7 +16,7 @@ class UserContainer extends React.Component {
         return (
             <React.Fragment>
                 <User
-                    name={profile.firstName + ' ' + profile.lastName}
+                    name={profile.name}
                 />
                 <SignOut
                     handleSignOut={this.handleSignOut}
