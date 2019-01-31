@@ -53,6 +53,7 @@ const mapStateToProps = state => {
     return {
         user: user,
         api: user.api.type,
+        profile: user.profile,
     }
 };
 
