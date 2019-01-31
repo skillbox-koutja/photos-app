@@ -26,7 +26,7 @@ export function createUserReducer(preloadedState) {
                 return {...state, isFetching: false, error: action.payload.message};
 
             case SIGN_OUT_REQUEST:
-                return {...state, isFetching: false, error: action.payload.message};
+                return {...state, isFetching: false, profile: null};
 
             default:
                 return state
