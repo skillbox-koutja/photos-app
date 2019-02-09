@@ -1,8 +1,9 @@
 import React from 'react';
 import {deselectPhoto, toggleLike, getPhoto} from '../actions/PhotoActions';
 import {connect} from 'react-redux';
-import {Alert} from 'reactstrap';
-import {TargetPhoto} from '../components';
+import {Alert, Button, NavItem} from 'reactstrap';
+import {NavBar, TargetPhoto} from '../components';
+import {push} from 'connected-react-router';
 
 class TargetPhotoContainer extends React.Component {
     componentDidMount() {
@@ -10,6 +11,7 @@ class TargetPhotoContainer extends React.Component {
             this.loadPhoto();
         }
     }
+
     loadPhoto() {
         const {match} = this.props;
         this.props.getPhoto(match.params.id);
@@ -21,6 +23,7 @@ class TargetPhotoContainer extends React.Component {
             error,
             toggleLike,
             deselectPhoto,
+            goHome,
         } = this.props;
 
         if (error) {
@@ -33,12 +36,19 @@ class TargetPhotoContainer extends React.Component {
             return <Alert color="info">Загружаю...</Alert>;
         }
 
-        return <TargetPhoto
-            target={target}
-            isLoading={isLoading}
-            toggleLike={toggleLike}
-            deselectPhoto={deselectPhoto}
-        />;
+        return <React.Fragment>
+            <NavBar>
+                <NavItem>
+                    <Button onClick={goHome}>Вернуться назад</Button>
+                </NavItem>
+            </NavBar>
+            <TargetPhoto
+                target={target}
+                isLoading={isLoading}
+                toggleLike={toggleLike}
+                deselectPhoto={deselectPhoto}
+            />
+        </React.Fragment>;
     }
 }
 
@@ -53,6 +63,7 @@ const mapDispatchToProps = dispatch => {
         toggleLike: (photo) => dispatch(toggleLike(photo)),
         deselectPhoto: (photo) => dispatch(deselectPhoto(photo)),
         getPhoto: (id) => dispatch(getPhoto(id)),
+        goHome: () => dispatch(push('/')),
     };
 };
 

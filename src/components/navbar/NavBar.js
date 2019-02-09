@@ -11,6 +11,7 @@ class NavBar extends React.Component {
                 <NavItem>
                     <UserContainer/>
                 </NavItem>
+                {this.props.children}
             </Nav>
         )
     }
