@@ -16,7 +16,6 @@ let middleware = [thunk];
 // }
 middleware = [...middleware, logger];
 export default function configureStore(preloadedState) {
-    console.log(preloadedState);
     return createStore(
         createRootReducer(history, preloadedState), // root reducer with router state
         compose(

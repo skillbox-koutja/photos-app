@@ -4,7 +4,6 @@ import PhotoCard from './PhotoCard';
 
 class TargetPhoto extends React.Component {
     render() {
-        console.log(this.props, this);
         const {
             target,
             toggleLike,

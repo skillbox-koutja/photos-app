@@ -45,7 +45,6 @@ export default class PhotoList extends React.Component {
 
     render() {
         const {photos} = this.props;
-        console.log(photos[0]);
         return createGridRows(photos).map((cols, i) => (
             <Row key={i}> {
                 cols.map(this.renderPhoto)
