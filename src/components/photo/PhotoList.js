@@ -37,7 +37,7 @@ export default class PhotoList extends React.Component {
                     selectPhoto={selectPhoto}
                     author={photo.user.name}
                     authorLink={photo.user.links.html}
-                    createdAt={photo.created_at}
+                    uploadedAt={photo.updated_at}
                 />
             </Col>
         );

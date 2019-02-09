@@ -9,12 +9,12 @@ export default class PhotoCard extends React.Component {
             author,
             authorLink,
             src,
-            createdAt,
+            uploadedAt,
             selectPhoto,
             toggleLike,
             photo,
         } = this.props;
-        let date = (new Date(createdAt)).toLocaleDateString();
+        let date = (new Date(uploadedAt)).toLocaleDateString();
         return (
             <Card className="photo">
                 <CardImg
@@ -44,7 +44,7 @@ PhotoCard.propTypes = {
     author: PropTypes.string.isRequired,
     authorLink: PropTypes.string.isRequired,
     src: PropTypes.string.isRequired,
-    createdAt: PropTypes.string.isRequired,
+    uploadedAt: PropTypes.string.isRequired,
     photo: PropTypes.object.isRequired,
     toggleLike: PropTypes.func,
     selectPhoto: PropTypes.func,
