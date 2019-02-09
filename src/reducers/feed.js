@@ -3,6 +3,7 @@ import {
     GET_PHOTOS_SUCCESS,
     GET_PHOTOS_FAIL,
 } from '../actions/FeedActions';
+import {SIGN_OUT_REQUEST} from '../actions/UserActions';
 
 let initialState = {
     api: null,
@@ -32,6 +33,13 @@ export function createFeedReducer(preloadedState) {
                     ...state,
                     isFetching: false,
                     error: action.payload.message,
+                };
+            case SIGN_OUT_REQUEST:
+                return {
+                    ...state,
+                    photos: state.photos.map(photo => {
+                        return photo.liked_by_user = false;
+                    })
                 };
             default:
                 return state;
