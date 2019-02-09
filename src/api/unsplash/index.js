@@ -5,6 +5,31 @@ const {REACT_APP_UNSPLASH_ACCESS_KEY, REACT_APP_UNSPLASH_SECRET, REACT_APP_CALLB
 
 export const API_UNSPLASH = 'unsplash';
 
+const ACCESS_TOKEN_KEY = 'unsplash_access_token';
+const USER_PROFILE_KEY = 'unsplash_user_profile';
+
+const readAccessToken = () => {
+    return localStorage.getItem(ACCESS_TOKEN_KEY) || null;
+};
+const saveAccessToken = (token) => {
+    unsplash.auth.setBearerToken(token);
+    if (token) {
+        localStorage.setItem(ACCESS_TOKEN_KEY, token);
+    } else {
+        localStorage.removeItem(ACCESS_TOKEN_KEY);
+    }
+    return this;
+};
+const saveUserProfile = (profile) => {
+    if (profile) {
+        profile = JSON.stringify(profile);
+        localStorage.setItem(USER_PROFILE_KEY, profile);
+    } else {
+        localStorage.removeItem(USER_PROFILE_KEY);
+    }
+    return this;
+};
+
 // Создаем экземпляр объекта для доступа к API
 const unsplash = new Unsplash({
     applicationId: REACT_APP_UNSPLASH_ACCESS_KEY,
@@ -12,14 +37,22 @@ const unsplash = new Unsplash({
     callbackUrl: `${REACT_APP_CALLBACK_URL}/api-auth`
 });
 
+const token = readAccessToken();
+if (token) {
+    unsplash.auth.setBearerToken(token);
+}
+
 export default {
     type: API_UNSPLASH,
     signIn() {
         const authenticationUrl = unsplash.auth.getAuthenticationUrl([
-            "public",
-            "write_likes"
+            'public',
+            'write_likes',
         ]);
         window.location.assign(authenticationUrl);
+    },
+    signOut() {
+        saveAccessToken(null);
     },
     getAuth() {
         // Считываем GET-параметр code из URL
@@ -28,15 +61,26 @@ export default {
             code,
         };
     },
+    getUserProfile() {
+        let profile = localStorage.getItem(USER_PROFILE_KEY);
+        try {
+            profile = profile && JSON.parse(profile);
+        } catch (e) {
+            //
+        }
+        return profile;
+    },
     userAuthentication(query, success, failure) {
         unsplash.auth.userAuthentication(query.code)
             .then(toJson)
             .then(json => {
-                unsplash.auth.setBearerToken(json.access_token);
-
+                saveAccessToken(json.access_token);
                 unsplash.currentUser.profile()
                     .then(toJson)
-                    .then(profile => success(profile));
+                    .then(profile => {
+                        saveUserProfile(profile);
+                        success(profile);
+                    });
             })
             .catch(failure);
     },
@@ -46,7 +90,7 @@ export default {
             .then(photos => success(photos));
     },
     toggleLike(photo) {
-        const method = photo.liked_by_user ? 'unlikePhoto': 'likePhoto';
+        const method = photo.liked_by_user ? 'unlikePhoto' : 'likePhoto';
         unsplash.photos[method](photo.id);
     },
     getPhoto(id, success) {

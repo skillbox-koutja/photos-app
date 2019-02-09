@@ -36,7 +36,8 @@ export function handleSignIn() {
 }
 
 export function handleSignOut() {
-    return function (dispatch) {
+    return function (dispatch, getState) {
+        getState().user.api.signOut();
         dispatch({
             type: SIGN_OUT_REQUEST,
         });

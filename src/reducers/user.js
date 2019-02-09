@@ -14,6 +14,8 @@ let initialState = {
 };
 export function createUserReducer(preloadedState) {
     initialState = {...initialState, ...preloadedState};
+    initialState.profile = initialState.api.getUserProfile();
+
     return (state = initialState, action) => {
         switch (action.type) {
 
