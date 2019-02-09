@@ -13,7 +13,7 @@ class TargetPhoto extends React.Component {
             author={target.user.name}
             authorLink={target.user.links.html}
             src={target.urls.full}
-            createdAt={target.created_at}
+            uploadedAt={target.updated_at}
             photo={target}
             toggleLike={toggleLike}
         />;
