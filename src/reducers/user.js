@@ -9,7 +9,6 @@ let initialState = {
     api: null,
     profile: null,
     authorizedUser: false,
-    targetPhoto: null,
     error: '',
     isFetching: false,
 };
