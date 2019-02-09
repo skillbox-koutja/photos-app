@@ -8,26 +8,26 @@ let cached = false;
 function getMorePhotos(offset, count, dispatch, getState) {
     getState().feed.api.getPhotos(offset, count, r => {
             try {
-                photosArr = photosArr.concat(r.response.items);
-                if (offset <= r.response.count) {
+                photosArr = photosArr.concat(r);
+                if (offset <= r.count) {
                     offset += 1; // максимальное количество фото которое можно получить за 1 запрос
-                    getMorePhotos(offset, count, dispatch, getState)
+                    getMorePhotos(offset, count, dispatch, getState);
                 } else {
                     cached = true;
                     dispatch({
                         type: GET_PHOTOS_SUCCESS,
                         payload: photosArr,
-                    })
+                    });
                 }
             } catch (e) {
                 dispatch({
                     type: GET_PHOTOS_FAIL,
                     error: true,
                     payload: new Error(e),
-                })
+                });
             }
         }
-    )
+    );
 }
 
 export function getPhotos() {
@@ -40,9 +40,9 @@ export function getPhotos() {
             dispatch({
                 type: GET_PHOTOS_SUCCESS,
                 payload: photosArr,
-            })
+            });
         } else {
-            getMorePhotos(0, 10, dispatch, getState)
+            getMorePhotos(0, 10, dispatch, getState);
         }
-    }
+    };
 }

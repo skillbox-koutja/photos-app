@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {Feed} from '../components/feed/Feed';
 import {getPhotos} from '../actions/FeedActions';
 import {
-    toggleLike,
     selectPhoto,
     deselectPhoto,
 } from '../actions/PhotoActions';
