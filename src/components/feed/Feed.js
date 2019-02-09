@@ -8,12 +8,13 @@ import {Button} from 'reactstrap';
 
 export class Feed extends React.Component {
     componentDidMount() {
-        this.loadPhotos(0);
+        document.addEventListener('scroll', this.trackScrolling, false);
+        this.loadPhotos(1);
     }
 
     loadPhotos(offset) {
         this.props.getPhotos(offset, () => {
-            document.addEventListener('scroll', this.trackScrolling)
+            document.addEventListener('scroll', this.trackScrolling, false)
         });
     }
 

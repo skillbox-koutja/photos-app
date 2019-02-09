@@ -4,8 +4,8 @@ export const GET_PHOTOS_FAIL = 'GET_PHOTOS_FAIL';
 
 const PHOTO_REQUEST_LIMIT = 10;
 
-let photosArr = [];
-let photosOffset = -1;
+let photosArr = [],
+    photosOffset = 0;
 
 function getMorePhotos(offset, count, dispatch, getState, success) {
     getState().feed.api.getPhotos(offset, count, r => {
@@ -33,12 +33,20 @@ const isEmpty = (a) => {
 
 export function getPhotos(offset, success) {
     return (dispatch, getState) => {
-        if (isEmpty(offset) || offset > photosOffset) {
+        let allowLoad = true;
+        if (isEmpty(offset)) {
+            photosOffset++;
+        } else if (offset > photosOffset) {
+            photosOffset = offset;
+        } else {
+            allowLoad = false;
+        }
+        if (allowLoad) {
             dispatch({
                 type: GET_PHOTOS_REQUEST,
             });
             getMorePhotos(photosOffset, PHOTO_REQUEST_LIMIT, dispatch, getState, success);
         }
-        photosOffset++;
+
     };
 }
