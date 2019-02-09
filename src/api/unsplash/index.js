@@ -45,11 +45,9 @@ export default {
             .then(toJson)
             .then(photos => success(photos));
     },
-    toggleLike(photo, success) {
+    toggleLike(photo) {
         const method = photo.liked_by_user ? 'unlikePhoto': 'likePhoto';
-        unsplash.photos[method](photo.id)
-            .then(toJson)
-            .then(photo => success(photo));
+        unsplash.photos[method](photo.id);
     },
     getPhoto(id, success) {
         unsplash.photos.getPhoto(id)
