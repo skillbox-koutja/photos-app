@@ -12,14 +12,14 @@ class UserContainer extends React.Component {
     };
 
     renderAuthorizedTemplate() {
-        const {profile} = this.props;
+        const {profile, handleSignOut} = this.props;
         return (
             <React.Fragment>
                 <User
                     name={profile.name}
                 />
                 <SignOut
-                    handleSignOut={this.handleSignOut}
+                    handleSignOut={handleSignOut}
                 />
             </React.Fragment>
         );
@@ -61,7 +61,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleSignIn: (api) => dispatch(handleSignIn(api)),
-        handleSignOut: successCallback => dispatch(handleSignOut(successCallback)),
+        handleSignOut: () => dispatch(handleSignOut()),
     }
 };
 

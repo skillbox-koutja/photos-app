@@ -29,17 +29,16 @@ export function handleAuthComplete(query) {
     }
 }
 
-export function handleSignIn(api) {
+export function handleSignIn() {
     return function (dispatch, getState) {
         getState().user.api.signIn(dispatch);
     }
 }
 
-export function handleSignOut(successCallback) {
+export function handleSignOut() {
     return function (dispatch) {
         dispatch({
             type: SIGN_OUT_REQUEST,
         });
-        successCallback();
     }
 }
