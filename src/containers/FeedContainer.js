@@ -2,18 +2,32 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Feed} from '../components/feed/Feed';
 import {getPhotos} from '../actions/FeedActions';
-import {toggleLike} from '../actions/UserActions';
+import {
+    toggleLike,
+    selectPhoto,
+    deselectPhoto,
+} from '../actions/PhotoActions';
 
 class FeedContainer extends React.Component {
     render() {
-        const {feed, getPhotos, toggleLike} = this.props;
+        const {
+            photo,
+            feed,
+            getPhotos,
+            toggleLike,
+            selectPhoto,
+            deselectPhoto,
+        } = this.props;
         return (
             <Feed
+                target={photo.target}
                 photos={feed.photos}
                 isFetching={feed.isFetching}
                 error={feed.error}
                 getPhotos={getPhotos}
                 toggleLike={toggleLike}
+                selectPhoto={selectPhoto}
+                deselectPhoto={deselectPhoto}
             />
         )
     }
@@ -22,6 +36,7 @@ class FeedContainer extends React.Component {
 const mapStateToProps = state => {
     return {
         feed: state.feed,
+        photo: state.photo,
     }
 };
 
@@ -29,6 +44,8 @@ const mapDispatchToProps = dispatch => {
     return {
         getPhotos: () => dispatch(getPhotos()),
         toggleLike: (photo) => dispatch(toggleLike(photo)),
+        selectPhoto: (photo) => dispatch(selectPhoto(photo)),
+        deselectPhoto: (photo) => dispatch(deselectPhoto(photo)),
     }
 };
 

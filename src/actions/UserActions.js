@@ -6,7 +6,6 @@ export const SIGN_IN_FAIL = 'SIGN_IN_FAIL';
 
 export const SIGN_OUT_REQUEST = 'SIGN_IN_REQUEST';
 
-export const TOGGLE_LIKE = 'TOGGLE_LIKE';
 
 export function handleAuthComplete(query) {
     return function (dispatch, getState) {
@@ -42,15 +41,5 @@ export function handleSignOut(successCallback) {
             type: SIGN_OUT_REQUEST,
         });
         successCallback();
-    }
-}
-
-export function toggleLike(photo) {
-    return function (dispatch, getState) {
-        getState().user.api.toggleLike(photo);
-        dispatch({
-            type: TOGGLE_LIKE,
-            payload: photo,
-        });
     }
 }

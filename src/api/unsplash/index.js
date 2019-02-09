@@ -19,29 +19,16 @@ export default {
             "public",
             "write_likes"
         ]);
-        console.log({
-            authenticationUrl,
-            unsplash
-        });
-        // Отправляем пользователя по этому адресу
         window.location.assign(authenticationUrl);
     },
     getAuth() {
         // Считываем GET-параметр code из URL
         const code = getQueryVariable('code');
-        console.log(code, window.location.search);
         return {
             code,
         };
     },
     userAuthentication(query, success, failure) {
-        console.log({
-            fn: 'userAuthentication',
-            unsplash,
-            query,
-            success,
-            failure
-        });
         unsplash.auth.userAuthentication(query.code)
             .then(toJson)
             .then(json => {
@@ -60,9 +47,13 @@ export default {
     },
     toggleLike(photo, success) {
         const method = photo.liked_by_user ? 'unlikePhoto': 'likePhoto';
-        console.log(photo.liked_by_user, method);
-        /*unsplash.photos[method](photo.id)
+        unsplash.photos[method](photo.id)
             .then(toJson)
-            .then(photo => success(photo));*/
+            .then(photo => success(photo));
+    },
+    getPhoto(id, success) {
+        unsplash.photos.getPhoto(id)
+            .then(toJson)
+            .then(photo => success(photo));
     }
 };

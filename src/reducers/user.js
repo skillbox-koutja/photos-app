@@ -3,7 +3,6 @@ import {
     SIGN_IN_SUCCESS,
     SIGN_IN_FAIL,
     SIGN_OUT_REQUEST,
-    TOGGLE_LIKE,
 } from '../actions/UserActions';
 
 let initialState = {
@@ -30,14 +29,6 @@ export function createUserReducer(preloadedState) {
             case SIGN_OUT_REQUEST:
                 return {...state, isFetching: false, profile: null};
 
-            case TOGGLE_LIKE:
-                const targetPhoto = {...state.targetPhoto, ...action.payload};
-                targetPhoto.liked_by_user = !targetPhoto.liked_by_user;
-                return {
-                    ...state,
-                    targetPhoto
-
-                };
             default:
                 return state
         }
