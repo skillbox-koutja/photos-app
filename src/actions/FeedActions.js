@@ -2,23 +2,20 @@ export const GET_PHOTOS_REQUEST = 'GET_PHOTOS_REQUEST';
 export const GET_PHOTOS_SUCCESS = 'GET_PHOTOS_SUCCESS';
 export const GET_PHOTOS_FAIL = 'GET_PHOTOS_FAIL';
 
-let photosArr = [];
-let cached = false;
+const PHOTO_REQUEST_LIMIT = 10;
 
-function getMorePhotos(offset, count, dispatch, getState) {
+let photosArr = [];
+let photosOffset = -1;
+
+function getMorePhotos(offset, count, dispatch, getState, success) {
     getState().feed.api.getPhotos(offset, count, r => {
             try {
                 photosArr = photosArr.concat(r);
-                if (offset <= r.count) {
-                    offset += 1; // максимальное количество фото которое можно получить за 1 запрос
-                    getMorePhotos(offset, count, dispatch, getState);
-                } else {
-                    cached = true;
-                    dispatch({
-                        type: GET_PHOTOS_SUCCESS,
-                        payload: photosArr,
-                    });
-                }
+                dispatch({
+                    type: GET_PHOTOS_SUCCESS,
+                    payload: photosArr,
+                });
+                success();
             } catch (e) {
                 dispatch({
                     type: GET_PHOTOS_FAIL,
@@ -30,19 +27,18 @@ function getMorePhotos(offset, count, dispatch, getState) {
     );
 }
 
-export function getPhotos() {
-    return (dispatch, getState) => {
-        dispatch({
-            type: GET_PHOTOS_REQUEST,
-        });
+const isEmpty = (a) => {
+    return typeof (a) === 'undefined' || a === null;
+};
 
-        if (cached) {
+export function getPhotos(offset, success) {
+    return (dispatch, getState) => {
+        if (isEmpty(offset) || offset > photosOffset) {
             dispatch({
-                type: GET_PHOTOS_SUCCESS,
-                payload: photosArr,
+                type: GET_PHOTOS_REQUEST,
             });
-        } else {
-            getMorePhotos(0, 10, dispatch, getState);
+            getMorePhotos(photosOffset, PHOTO_REQUEST_LIMIT, dispatch, getState, success);
         }
+        photosOffset++;
     };
 }

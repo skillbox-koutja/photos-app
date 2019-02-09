@@ -41,7 +41,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        getPhotos: () => dispatch(getPhotos()),
+        getPhotos: (offset, success) => dispatch(getPhotos(offset, success)),
         selectPhoto: (photo) => dispatch(selectPhoto(photo)),
         deselectPhoto: (photo) => dispatch(deselectPhoto(photo)),
     }

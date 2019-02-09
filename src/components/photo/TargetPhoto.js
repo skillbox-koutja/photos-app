@@ -25,6 +25,6 @@ export default TargetPhoto;
 TargetPhoto.propTypes = {
     target: PropTypes.object.isRequired,
     isLoading: PropTypes.bool.isRequired,
-    toggleLike: PropTypes.func.isRequired,
+    toggleLike: PropTypes.func,
     deselectPhoto: PropTypes.func,
 };

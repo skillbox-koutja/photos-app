@@ -21,12 +21,11 @@ class TargetPhotoContainer extends React.Component {
         const {
             photo,
             error,
-            toggleLike,
             deselectPhoto,
             allowToggleLike,
             goHome,
         } = this.props;
-
+        const toggleLike = allowToggleLike ? this.props.toggleLike : null;
         if (error) {
             return <Alert color="danger">Во время загрузки фото произошла ошибка</Alert>;
         }
@@ -46,7 +45,7 @@ class TargetPhotoContainer extends React.Component {
             <TargetPhoto
                 target={target}
                 isLoading={isLoading}
-                toggleLike={allowToggleLike && toggleLike}
+                toggleLike={toggleLike}
                 deselectPhoto={deselectPhoto}
             />
         </React.Fragment>;

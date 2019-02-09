@@ -2,18 +2,20 @@ import {connect} from 'react-redux';
 import {push} from 'connected-react-router';
 import React from 'react';
 import UserContainer from '../../containers/UserContainer';
-import {Nav, NavItem} from 'reactstrap';
+import {Navbar, Nav, NavItem} from 'reactstrap';
 
 class NavBar extends React.Component {
     render() {
         return (
-            <Nav>
-                <NavItem>
-                    <UserContainer/>
-                </NavItem>
-                {this.props.children}
-            </Nav>
-        )
+            <Navbar fixed="top" color="light" light expand="md">
+                <Nav>
+                    <NavItem>
+                        <UserContainer/>
+                    </NavItem>
+                    {this.props.children}
+                </Nav>
+            </Navbar>
+        );
     }
 }
 

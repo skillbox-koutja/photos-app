@@ -3,41 +3,63 @@ import {NavBar} from '../index';
 
 import PropTypes from 'prop-types';
 import PhotoList from '../photo/PhotoList';
+import {Button} from 'reactstrap';
+
 
 export class Feed extends React.Component {
     componentDidMount() {
-        this.props.getPhotos();
+        this.loadPhotos(0);
     }
+
+    loadPhotos(offset) {
+        this.props.getPhotos(offset, () => {
+            document.addEventListener('scroll', this.trackScrolling)
+        });
+    }
+
+    isBottom(el) {
+        return el.getBoundingClientRect().bottom <= window.innerHeight;
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('scroll', this.trackScrolling, false);
+    }
+
+    trackScrolling = () => {
+        const wrappedElement = document.getElementById('root');
+        if (this.isBottom(wrappedElement)) {
+            this.loadPhotos();
+            document.removeEventListener('scroll', this.trackScrolling, false);
+        }
+    };
 
     renderTemplate = () => {
         const {
             photos,
-            isFetching,
             error,
             selectPhoto,
         } = this.props;
 
         if (error) {
-            return <p className="error">Во время загрузки фото произошла ошибка</p>
+            return <p className="error">Во время загрузки фото произошла ошибка</p>;
         }
 
-        if (isFetching) {
-            return <p>Загрузка...</p>
-        } else {
-            return <PhotoList
-                photos={photos}
-                selectPhoto={selectPhoto}
-            />
-        }
+        return <PhotoList
+            photos={photos}
+            selectPhoto={selectPhoto}
+        />;
     };
 
     render() {
+        const {isFetching} = this.props;
         return (
             <React.Fragment>
                 <NavBar/>
                 {this.renderTemplate()}
+                {isFetching ? <p>Загрузка...</p> : <Button onClick={() => this.loadPhotos()}>Загрузить еще</Button>}
+
             </React.Fragment>
-        )
+        );
     }
 }
 
