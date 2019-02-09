@@ -38,7 +38,8 @@ export function createFeedReducer(preloadedState) {
                 return {
                     ...state,
                     photos: state.photos.map(photo => {
-                        return photo.liked_by_user = false;
+                        photo.liked_by_user = false;
+                        return photo;
                     })
                 };
             default:
