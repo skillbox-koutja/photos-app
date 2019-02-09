@@ -11,7 +11,7 @@ import createApi, {API_UNSPLASH} from './api';
 const store = configureStore({
     api: createApi(API_UNSPLASH)
 });
-console.log('configureStore', store);
+
 ReactDOM.render(
     <Provider store={store}>
         <App history={history}/>
