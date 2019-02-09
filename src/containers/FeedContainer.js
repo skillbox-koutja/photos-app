@@ -43,7 +43,6 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         getPhotos: () => dispatch(getPhotos()),
-        toggleLike: (photo) => dispatch(toggleLike(photo)),
         selectPhoto: (photo) => dispatch(selectPhoto(photo)),
         deselectPhoto: (photo) => dispatch(deselectPhoto(photo)),
     }

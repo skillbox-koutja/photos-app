@@ -8,6 +8,7 @@ import {
 let initialState = {
     api: null,
     profile: null,
+    authorizedUser: false,
     targetPhoto: null,
     error: '',
     isFetching: false,
@@ -21,13 +22,13 @@ export function createUserReducer(preloadedState) {
                 return {...state, isFetching: true, error: ''};
 
             case SIGN_IN_SUCCESS:
-                return {...state, isFetching: false, profile: action.payload};
+                return {...state, isFetching: false, authorizedUser: true, profile: action.payload};
 
             case SIGN_IN_FAIL:
                 return {...state, isFetching: false, error: action.payload.message};
 
             case SIGN_OUT_REQUEST:
-                return {...state, isFetching: false, profile: null};
+                return {...state, isFetching: false, authorizedUser: false, profile: null};
 
             default:
                 return state

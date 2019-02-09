@@ -23,6 +23,7 @@ class TargetPhotoContainer extends React.Component {
             error,
             toggleLike,
             deselectPhoto,
+            allowToggleLike,
             goHome,
         } = this.props;
 
@@ -45,7 +46,7 @@ class TargetPhotoContainer extends React.Component {
             <TargetPhoto
                 target={target}
                 isLoading={isLoading}
-                toggleLike={toggleLike}
+                toggleLike={allowToggleLike && toggleLike}
                 deselectPhoto={deselectPhoto}
             />
         </React.Fragment>;
@@ -54,6 +55,7 @@ class TargetPhotoContainer extends React.Component {
 
 const mapStateToProps = state => {
     return {
+        authorizedUser: state.user.authorizedUser,
         photo: state.photo,
     };
 };

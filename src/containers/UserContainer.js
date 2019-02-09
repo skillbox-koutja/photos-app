@@ -37,11 +37,11 @@ class UserContainer extends React.Component {
     };
 
     render() {
-        const {profile} = this.props;
+        const {authorizedUser} = this.props;
         return (
             <div className="user-info">
                 {
-                    profile && profile.username ? this.renderAuthorizedTemplate() : this.renderUnknownUserTemplate()
+                    authorizedUser ? this.renderAuthorizedTemplate() : this.renderUnknownUserTemplate()
                 }
             </div>
         )
@@ -53,6 +53,7 @@ const mapStateToProps = state => {
     return {
         user: user,
         api: user.api.type,
+        authorizedUser: user.authorizedUser,
         profile: user.profile,
     }
 };
