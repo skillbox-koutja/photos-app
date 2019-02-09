@@ -22,10 +22,10 @@ class TargetPhotoContainer extends React.Component {
             photo,
             error,
             deselectPhoto,
-            allowToggleLike,
+            authorizedUser,
             goHome,
         } = this.props;
-        const toggleLike = allowToggleLike ? this.props.toggleLike : null;
+        const toggleLike = authorizedUser ? this.props.toggleLike : null;
         if (error) {
             return <Alert color="danger">Во время загрузки фото произошла ошибка</Alert>;
         }

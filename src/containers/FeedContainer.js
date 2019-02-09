@@ -13,7 +13,6 @@ class FeedContainer extends React.Component {
             photo,
             feed,
             getPhotos,
-            toggleLike,
             selectPhoto,
             deselectPhoto,
         } = this.props;
@@ -24,7 +23,6 @@ class FeedContainer extends React.Component {
                 isFetching={feed.isFetching}
                 error={feed.error}
                 getPhotos={getPhotos}
-                toggleLike={toggleLike}
                 selectPhoto={selectPhoto}
                 deselectPhoto={deselectPhoto}
             />
