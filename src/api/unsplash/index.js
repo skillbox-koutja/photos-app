@@ -16,9 +16,13 @@ const saveAccessToken = (token) => {
     if (token) {
         localStorage.setItem(ACCESS_TOKEN_KEY, token);
     } else {
-        localStorage.removeItem(ACCESS_TOKEN_KEY);
+        clearLocaleStorage()
     }
     return this;
+};
+const clearLocaleStorage = () => {
+    localStorage.removeItem(ACCESS_TOKEN_KEY);
+    localStorage.removeItem(USER_PROFILE_KEY);
 };
 const saveUserProfile = (profile) => {
     if (profile) {
