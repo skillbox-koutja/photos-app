@@ -4,12 +4,23 @@ import {
     GET_PHOTOS_FAIL,
 } from '../actions/FeedActions';
 import {SIGN_OUT_REQUEST} from '../actions/UserActions';
+import {TOGGLE_LIKE} from '../actions/PhotoActions';
 
 let initialState = {
     api: null,
     photos: [],
     error: '',
     isFetching: false,
+};
+const toggleLikePhotoReducer = function (state, action) {
+    let photo = state.photos.find(photo => {
+        return photo.id === action.payload.id;
+    });
+    if (photo) {
+        photo.liked_by_user = !photo.liked_by_user;
+        photo.liked_by_user ? ++photo.likes : --photo.likes;
+    }
+    return state;
 };
 export function createFeedReducer(preloadedState) {
     initialState = {...initialState, ...preloadedState};
@@ -42,6 +53,8 @@ export function createFeedReducer(preloadedState) {
                         return photo;
                     })
                 };
+            case TOGGLE_LIKE:
+                return toggleLikePhotoReducer(state, action);
             default:
                 return state;
         }
