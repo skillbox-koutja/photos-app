@@ -61,6 +61,9 @@ export default {
             code,
         };
     },
+    isAuthorizedUser() {
+        return readAccessToken() || false;
+    },
     getUserProfile() {
         let profile = localStorage.getItem(USER_PROFILE_KEY);
         try {
