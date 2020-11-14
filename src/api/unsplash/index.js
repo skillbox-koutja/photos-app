@@ -36,7 +36,7 @@ const saveUserProfile = (profile) => {
 
 // Создаем экземпляр объекта для доступа к API
 const unsplash = new Unsplash({
-    applicationId: REACT_APP_UNSPLASH_ACCESS_KEY,
+    accessKey: REACT_APP_UNSPLASH_ACCESS_KEY,
     secret: REACT_APP_UNSPLASH_SECRET,
     callbackUrl: `${REACT_APP_CALLBACK_URL}/api-auth`
 });
@@ -46,7 +46,7 @@ if (token) {
     unsplash.auth.setBearerToken(token);
 }
 
-export default {
+const api = {
     type: API_UNSPLASH,
     signIn() {
         const authenticationUrl = unsplash.auth.getAuthenticationUrl([
@@ -106,3 +106,5 @@ export default {
             .then(photo => success(photo));
     }
 };
+
+export default api;
