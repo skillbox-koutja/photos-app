@@ -8,38 +8,38 @@ export const SIGN_OUT_REQUEST = 'SIGN_OUT_REQUEST';
 
 
 export function handleAuthComplete(query) {
-    return function (dispatch, getState) {
-        getState().user.api.userAuthentication(
-            query,
-            user => {
-                dispatch({
-                    type: SIGN_IN_SUCCESS,
-                    payload: user,
-                });
-                dispatch(push('/'));
-            },
-            () => {
-                dispatch({
-                    type: SIGN_IN_FAIL,
-                    error: true,
-                    payload: new Error('Ошибка авторизации'),
-                });
-            },
-        );
-    }
+  return function(dispatch, getState) {
+    getState().user.api.userAuthentication(
+      query,
+      user => {
+        dispatch({
+          type: SIGN_IN_SUCCESS,
+          payload: user,
+        });
+        dispatch(push('/'));
+      },
+      () => {
+        dispatch({
+          type: SIGN_IN_FAIL,
+          error: true,
+          payload: new Error('Ошибка авторизации'),
+        });
+      }
+    );
+  };
 }
 
 export function handleSignIn() {
-    return function (dispatch, getState) {
-        getState().user.api.signIn(dispatch);
-    }
+  return function(dispatch, getState) {
+    getState().user.api.signIn(dispatch);
+  };
 }
 
 export function handleSignOut() {
-    return function (dispatch, getState) {
-        getState().user.api.signOut();
-        dispatch({
-            type: SIGN_OUT_REQUEST,
-        });
-    }
+  return function(dispatch, getState) {
+    getState().user.api.signOut();
+    dispatch({
+      type: SIGN_OUT_REQUEST,
+    });
+  };
 }
